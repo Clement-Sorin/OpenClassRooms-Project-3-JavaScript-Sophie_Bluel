@@ -9,6 +9,7 @@ fetch("http://localhost:5678/api/works")
     })
     .then(works => {
         genererProjets(works)
+        genererFiltres(works)
     })
 
 // Generation dynamique des projets sur la page HTML
@@ -32,4 +33,29 @@ function genererProjets(works) {
         figureProjet.appendChild(imageProjet)
         figureProjet.appendChild(titreProjet)
     }
+}
+
+// Génération des filtres
+function genererFiltres(works) {
+    // Recherche des différentes catégories
+    const nomCategorie = new Set()
+    works.forEach(categories => {
+        nomCategorie.add(categories.category.name)
+    })
+    const tableCategories = Array.from(nomCategorie)
+    // Generation des boutons de filtre
+    const divFiltres = document.querySelector(".fitres")
+    let boutons = document.createElement("button")
+    boutons.classList.add("btn-filtre")
+    boutons.innerText = "Tous"
+    divFiltres.appendChild(boutons)
+    for (let i = 0 ; i < tableCategories.length ; i++) {
+        boutons = document.createElement("button")
+        boutons.classList.add("btn-filtre")
+        boutons.innerText = tableCategories[i]
+        divFiltres.appendChild(boutons)
+    }
+    
+    
+    
 }
