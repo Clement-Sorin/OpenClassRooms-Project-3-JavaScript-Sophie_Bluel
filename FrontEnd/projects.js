@@ -1,16 +1,15 @@
-// Appel au contenu du local storage pour works
-let works = window.localStorage.getItem("works")
-// Appel à la requête de l'API pour works et sauvegarde dans le local storage
-if (works === null) {
-    // Récupération des travaux depuis l'API
-    const response = fetch("http://localhost:5678/api/works").then(response.json())
-    // Transformation des travaux en JSON
-    const valeurWorks = JSON.stringify(works)
-    // Stockage des informations dans le localStorage
-    window.localStorage.setItem("works", valeurWorks)
-} else {
-    works = JSON.parse(works)
-}
+// Requête des données depuis l'API
+fetch("http://localhost:5678/api/works")
+    .then(response => {
+        if (response.ok === false) {
+            throw new Error("Erreur de la requête HTTP")
+        }
+
+        return response.json()
+    })
+    .then(works => {
+        genererProjets(works)
+    })
 
 // Generation dynamique des projets sur la page HTML
 function genererProjets(works) {
@@ -34,5 +33,3 @@ function genererProjets(works) {
         figureProjet.appendChild(titreProjet)
     }
 }
-
-genererProjets(works)
