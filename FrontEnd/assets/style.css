@@ -3,7 +3,7 @@
    License: none (public domain)
 */
 
-html, body, div, span, applet, object, iframe,
+html, body, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
@@ -30,6 +30,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	background-color: #FFFEF8;
 }
 ol, ul {
 	list-style: none;
@@ -121,10 +122,38 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
+#portfolio {
+	margin-top: 100px;
+}
+
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
 }
+
+.fitres {
+	margin: 50px 0;
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+}
+
+.btn-filtre {
+	padding: 8px 15px;
+	border: 1px solid #1D6154;
+	background-color: #FFFEF8;
+	border-radius: 60px;
+	font-family: 'Syne';
+	font-size: 16px;
+	color: #1D6154
+}
+
+.btn-filtre:hover {
+	background-color: #1D6154;
+	color: #fff;
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -135,8 +164,12 @@ li:hover {
 
 .gallery img {
 	width: 100%;
-
 }
+
+figcaption {
+	margin-top: 10px;
+}
+
 #contact {
 	width: 50%;
 margin: auto;
