@@ -9,52 +9,36 @@ champEmail.addEventListener("change", event => {
     const valeurEmail = event.target.value.trim()
     const regex = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+")
     const resultEmail = regex.test(valeurEmail)
-    switch (resultEmail) {
-    case true:
+    if (resultEmail) {
         if (divEmail.contains(errorEmail)) {
             divEmail.removeChild(errorEmail)
         }
-
-        break
-    case false:
+    } else {
         if (!divEmail.contains(errorEmail)) {
             divEmail.appendChild(errorEmail)
         }
-
-        break
-    default:
-
-        break
     }
 })
 
 // Regex Champ de Password
 const champPassword = document.getElementById("password")
 const divPassword = document.getElementById("div-password")
-const errorPassword = document.createElement("p")
-errorPassword.classList.add("error")
-errorPassword.innerText = "Le format de saisi du mot de passe est invalide"
+const error = document.createElement("p")
+error.classList.add("error")
 
-champPassword.addEventListener("input", event => {
+champPassword.addEventListener("change", event => {
+    error.innerText = "Le format de saisi du mot de passe est invalide"
     const valeurPassword = event.target.value.trim()
     const regex = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{1,}$")
     const resultPassword = regex.test(valeurPassword)
-    switch (resultPassword) {
-    case true:
-        if (divPassword.contains(errorPassword)) {
-            divPassword.removeChild(errorPassword)
+    if (resultPassword) {
+        if (divPassword.contains(error)) {
+            divPassword.removeChild(error)
         }
-
-        break
-    case false:
-        if (!divPassword.contains(errorPassword)) {
-            divPassword.appendChild(errorPassword)
+    } else {
+        if (!divPassword.contains(error)) {
+            divPassword.appendChild(error)
         }
-
-        break
-    default:
-
-        break
     }
 })
 
@@ -75,9 +59,16 @@ formulaires.addEventListener("submit", event => {
         body: bodyRequete,
     }).then(response => {
         if (response.ok) {
+            if (divPassword.contains(error)) {
+                divPassword.removeChild(error)
+            }
+
             return response.json()
-        } else {
-            console.log("Mauvais login")
+        }
+
+        error.innerText = "Le mot de passe ou l'identifiant n'est pas valide"
+        if (!divPassword.contains(error)) {
+            divPassword.appendChild(error)
         }
     }).then(({token}) => {
         console.log("Token :" + token)
