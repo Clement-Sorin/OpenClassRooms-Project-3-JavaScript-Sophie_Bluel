@@ -48,8 +48,8 @@ formulaires.addEventListener("submit", event => {
     event.preventDefault()
     // Récupération des données du formulaire et implémentation dans un objet JSON
     const objetJsonLogin = {
-        email: document.getElementById("email").value,
-        password: document.getElementById("password").value,
+        email: champEmail.value,
+        password: champPassword.value,
     }
     const bodyRequete = JSON.stringify(objetJsonLogin)
     // Verification des données par requête HTTP
@@ -71,6 +71,7 @@ formulaires.addEventListener("submit", event => {
             divPassword.appendChild(error)
         }
     }).then(({token}) => {
-        console.log("Token :" + token)
+        window.localStorage.setItem("token", token)
+        window.location.href = "index.html"
     })
 })
