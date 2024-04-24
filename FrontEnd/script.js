@@ -1,6 +1,6 @@
 import {genererProjets, genererFiltres} from "./projects.js"
 import {verifierAuthentification} from "./authentified.js"
-import {gererModale} from "./modal.js"
+import {toggleModale} from "./modal.js"
 
 // Requête des données depuis l'API
 fetch("http://localhost:5678/api/works")
@@ -17,4 +17,4 @@ fetch("http://localhost:5678/api/works")
     })
 
 verifierAuthentification()
-gererModale()
+toggleModale()

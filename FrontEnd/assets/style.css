@@ -123,6 +123,11 @@ a {
 a:hover {
 	color: #B1663C;
 }
+
+a, button, input[type="submit"]{
+	cursor: pointer;
+}
+
 #introduction {
 	display: flex;
 	align-items: center;
@@ -246,7 +251,7 @@ input:-moz-autofill {
     color: inherit !important;
 }
 
-input[type="submit"]{
+input[type="submit"] {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -256,6 +261,12 @@ input[type="submit"]{
 	text-align: center;
 	border-radius: 60px ;
 }
+
+#contact input[type="submit"]:hover {
+	border: solid 2px #1D6154;
+	background-color: #FFFEF8;
+	color: #1D6154;
+} 
 
 footer nav ul {
 	display: flex;
@@ -334,4 +345,60 @@ footer nav ul {
 #div-icon-fermer {
 	display: flex;
 	justify-content: flex-end;
+}
+
+#title-modal {
+	font-size: 26px;
+	text-align: center;
+}
+
+#content-modal {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	padding: 40px 0;
+	border-bottom: solid 1px #B3B3B3;
+}
+
+.div-image-modal {
+	position: relative;
+}
+
+.img-modal {
+	width: 80px;
+}
+
+.link-icon-trash {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background-color: #000;
+	border-radius: 2px;
+}
+
+.link-icon-trash i {
+	color: #fff;
+	font-size: 10px;
+	padding: 3px;
+}
+
+#div-btn-modal {
+	display: flex;
+	justify-content: center;
+}
+
+#btn-modal {
+	padding: 8px 15px;
+	margin-top: 30px;
+	border: 1px solid #1D6154;
+	background-color: #1D6154;
+	border-radius: 60px;
+	font-family: 'Syne';
+	font-size: 16px;
+	color: #FFFEF8;
+}
+
+#btn-modal:hover {
+	background-color: #FFFEF8;
+	color: #1D6154;
 }
