@@ -1,5 +1,5 @@
 import {genererProjets, genererFiltres} from "./projects.js"
-import {verifierAuthentification} from "./logout.js"
+import {verifierAuthentification} from "./authentified.js"
 
 // Requête des données depuis l'API
 fetch("http://localhost:5678/api/works")

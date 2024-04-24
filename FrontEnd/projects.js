@@ -31,7 +31,7 @@ export function genererFiltres(works) {
     const tableCategories = Array.from(nomCategorie)
 
     // Generation des boutons de filtre
-    const divFiltres = document.querySelector(".fitres")
+    const divFiltres = document.querySelector(".filtres")
     // Bouton Tous
     let boutons = document.createElement("button")
     boutons.classList.add("btn-filtre")

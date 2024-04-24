@@ -4,6 +4,8 @@ export function verifierAuthentification() {
     if (tokenLocalStorage) {
         changerBoutonLogout()
         genererBandeauEdit()
+        genererBoutonModifier()
+        cacherFiltres()
     }
 }
 
@@ -19,6 +21,18 @@ function changerBoutonLogout() {
 
 // Fonction d'apparition du bandeau du mode édition
 function genererBandeauEdit() {
-    const divEdit = document.getElementById("hidden")
+    const divEdit = document.getElementById("div-edit-hidden")
     divEdit.id = "div-edit"
+}
+
+// Fonction d'apparition du bouton modifier
+function genererBoutonModifier() {
+    const divPortTitle = document.getElementById("modif-hidden") 
+    divPortTitle.id = "modif"
+}
+
+// Fonction de
+function cacherFiltres() {
+    const divFiltres = document.querySelector(".filtres")
+    divFiltres.classList.toggle("filtres-hidden")
 }

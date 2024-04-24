@@ -74,7 +74,7 @@ body {
 	color: #fff;
 }
 
-#hidden {
+#div-edit-hidden {
 	display: none;
 }
 
@@ -151,16 +151,26 @@ a:hover {
 	margin-top: 100px;
 }
 
-#portfolio h2 {
-	text-align: center;
-	margin-bottom: 1em;
+#port-title {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 15px;
+	margin-bottom: 50px;
 }
 
-.fitres {
-	margin: 50px 0;
+#modif-hidden {
+	display: none;
+}
+
+.filtres {
 	display: flex;
 	justify-content: center;
 	gap: 10px;
+}
+
+.filtres-hidden {
+	display: none;
 }
 
 .btn-filtre, #login-form button{
@@ -179,6 +189,7 @@ a:hover {
 }
 
 .gallery {
+	margin-top: 80px;
 	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
@@ -196,7 +207,7 @@ figcaption {
 
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
 #contact > * {
 	text-align: center;
@@ -217,13 +228,22 @@ margin: auto;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	padding-left: 10px;
 }
+
 #contact label {
 	margin: 2em 0 1em 0;
 }
 #contact textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	padding: 10px;
+	font-size: 1.2rem;
+}
+
+input:-moz-autofill {
+    background-color: transparent !important;
+    color: inherit !important;
 }
 
 input[type="submit"]{
