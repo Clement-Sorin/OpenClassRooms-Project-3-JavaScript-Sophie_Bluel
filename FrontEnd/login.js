@@ -73,5 +73,10 @@ formulaires.addEventListener("submit", event => {
     }).then(({token}) => {
         window.localStorage.setItem("token", token)
         window.location.href = "index.html"
+    }).catch(() => {
+        error.innerText = "Connexion impossible"
+        if (!divPassword.contains(error)) {
+            divPassword.appendChild(error)
+        }
     })
 })

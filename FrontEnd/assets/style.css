@@ -117,9 +117,6 @@ nav li {
 
 a {
 	text-decoration: none;
-}
-
-a:visited {
 	color: #000;
 }
 
@@ -247,11 +244,7 @@ footer nav ul {
 }
 
 /*******LOGIN PAGE*******/
-#body-login {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-}
+
 
 #h2-login {
 	text-align: center;
