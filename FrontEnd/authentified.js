@@ -31,7 +31,7 @@ function genererBoutonModifier() {
     divPortTitle.id = "modif"
 }
 
-// Fonction de
+// Fonction cacher les filtres
 function cacherFiltres() {
     const divFiltres = document.querySelector(".filtres")
     divFiltres.classList.toggle("filtres-hidden")
