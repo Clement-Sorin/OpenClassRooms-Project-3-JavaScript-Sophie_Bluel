@@ -95,26 +95,32 @@ function supprimerProjet() {
     })
     // Fonction de Requête DELETE
     function envoyerDelete(projetId) {
-        const token = localStorage.getItem("token")
-        const headerDelete = {
-            "Authorization": "Bearer " + token
-        }
-        try {
-            fetch(`http://localhost:5678/api/works/${projetId}`, {
-                method: "DELETE",
-                headers: headerDelete,
-                body: projetId
-            }).then(response => {
-                if (response.ok === false) {
-                    throw new Error("Erreur de la requête HTTP")
-                } else {
-                    rafraichirGallerie()
-                }
-            })
-        } catch(error) {
-            console.error(error)
-            alert("Le projet n'a pas pu être supprimé")
-        }
+        // Pop Up de confirmation de suppression
+        let alertSuppression = confirm("Êtes-vous sûr de vouloir supprimer ce projet?")
+        console.log(alertSuppression)
+        if(alertSuppression) {
+            // Préparation des données pour la requête
+            const token = localStorage.getItem("token")
+            const headerDelete = {
+                "Authorization": "Bearer " + token
+            }
+            // Requête fetch avec method DELETE
+            try {
+                fetch(`http://localhost:5678/api/works/${projetId}`, {
+                    method: "DELETE",
+                    headers: headerDelete,
+                    body: projetId
+                }).then(response => {
+                    if (response.ok === false) {
+                        alert("Erreur de la requête HTTP")
+                    } else {
+                        rafraichirGallerie()
+                    }
+                })
+            } catch(error) {
+                console.error(error)
+                alert("Le projet n'a pas pu être supprimé")
+            }
+        } 
     }
-
 }
