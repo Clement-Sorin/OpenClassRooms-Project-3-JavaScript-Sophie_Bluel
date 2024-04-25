@@ -1,6 +1,5 @@
-import {genererProjets, genererFiltres} from "./projects.js"
+import {genererProjets, genererFiltres, rechercherProjets, toggleModale} from "./functions.js"
 import {verifierAuthentification} from "./authentified.js"
-import {toggleModale} from "./modal.js"
 
 // Requête des données depuis l'API
 fetch("http://localhost:5678/api/works")
@@ -12,9 +11,12 @@ fetch("http://localhost:5678/api/works")
         return response.json()
     })
     .then(works => {
+        // DOM principal
         genererProjets(works)
         genererFiltres(works)
+        // modale
         toggleModale()
+        rechercherProjets(works)
     })
 
 verifierAuthentification()
