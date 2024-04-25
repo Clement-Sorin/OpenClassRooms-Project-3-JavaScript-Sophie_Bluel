@@ -14,7 +14,7 @@ fetch("http://localhost:5678/api/works")
     .then(works => {
         genererProjets(works)
         genererFiltres(works)
+        toggleModale()
     })
 
 verifierAuthentification()
-toggleModale()
