@@ -1,4 +1,4 @@
-import {genererProjets, genererFiltres, genererProjetsModale, toggleModale} from "./functions.js"
+import {genererProjets, genererFiltres, genererProjetsModale, toggleModale, openAjoutPhoto} from "./functions.js"
 import {verifierAuthentification} from "./authentified.js"
 
 // Requête des données depuis l'API
@@ -17,6 +17,7 @@ fetch("http://localhost:5678/api/works")
         // modale
         toggleModale()
         genererProjetsModale(works)
+        openAjoutPhoto()
     })
 
 verifierAuthentification()

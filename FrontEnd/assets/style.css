@@ -228,7 +228,7 @@ figcaption {
 	flex-direction: column;
 }
 
-#contact input, #email, #password {
+#contact input, #email, #password, #input-titre-ajouter-photo, #input-categorie-ajouter-photo {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
@@ -387,8 +387,9 @@ footer nav ul {
 	justify-content: center;
 }
 
-#btn-modal {
-	padding: 8px 15px;
+#btn-modal, #btn-valider-ajouter-photo {
+	padding: 8px 0;
+	width: 327px;
 	margin-top: 30px;
 	border: 1px solid #1D6154;
 	background-color: #1D6154;
@@ -398,7 +399,82 @@ footer nav ul {
 	color: #FFFEF8;
 }
 
-#btn-modal:hover {
+#btn-modal:hover, #btn-valider-ajouter-photo:hover  {
 	background-color: #FFFEF8;
 	color: #1D6154;
+}
+
+#form-ajout-photo {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-top: 40px;
+	gap: 20px;
+}
+
+#div-ajouter-photo {
+	width: 420px;
+	height: 170px;
+	background-color: #e8f1f6;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+}
+
+.fa-image {
+	color: #b9c5cc;
+	font-size: 4rem;
+}
+
+#btn-input-file {
+	z-index: 0;
+	width: 170px;
+	height:36px;
+	background-color: #b9c5cc;
+	border: none;
+	border-radius: 50px;
+	position: relative;
+}
+
+#btn-input-file:hover {
+	opacity: 0.8;
+}
+
+#file-input {
+	z-index: 1;
+	opacity: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+}
+
+.custom-file-input {
+	color: #306685;
+	z-index: 0;
+}
+
+#div-titre-ajouter-photo, #div-categorie-ajouter-photo {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	width: 420px;
+}
+
+#input-categorie-ajouter-photo {
+	background-color: #fff;
+	border: none;
+}
+
+#div-categorie-ajouter-photo {
+	padding-bottom: 30px;
+	border-bottom: solid 1px #B3B3B3;
+}
+
+#btn-valider-ajouter-photo {
+	margin-top: 10px;
 }
