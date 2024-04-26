@@ -207,6 +207,11 @@ export function openAjoutPhoto() {
 // Fonction d'ajout du contenu sur la partie Ajout Photo de la modale
 export function afficherAjoutPhoto() {
     titleModale.innerText = "Ajout photo"
+    // Icon Retour
+    const divIconRetour = document.getElementById("div-icon-fermer")
+    divIconRetour.innerHTML += `<a id="icon-retour"><i class="fa-solid fa-arrow-left"></i></a>`
+    divIconRetour.setAttribute("style","flex-direction: row-reverse; justify-content: space-between;")
+    retournerModaleGallerie()
     // Form
     const formAjout = document.createElement("form")
     formAjout.id = "form-ajout-photo"
@@ -251,4 +256,11 @@ export function afficherAjoutPhoto() {
     divBoutonAjouterPhoto.id = "div-bouton-ajouter-photo"
     formAjout.appendChild(divBoutonAjouterPhoto)
     divBoutonAjouterPhoto.innerHTML = `<button type="submit" id="btn-valider-ajouter-photo">Valider</button>`
+}
+
+function retournerModaleGallerie() {
+    const boutonRetour = document.getElementById("icon-retour")
+    boutonRetour.addEventListener("click", () => {
+        bodyModal.innerHTML= ""
+    })
 }

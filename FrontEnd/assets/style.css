@@ -347,6 +347,10 @@ footer nav ul {
 	justify-content: flex-end;
 }
 
+#icon-retour {
+	font-size: 1.3rem;
+}
+
 #title-modal {
 	font-size: 26px;
 	text-align: center;
