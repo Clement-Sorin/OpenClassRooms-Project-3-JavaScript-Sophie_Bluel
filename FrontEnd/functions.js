@@ -63,34 +63,44 @@ export function genererFiltres(works) {
     }
 }
 
-// Fonction d'ouverture/fermeture de modale
+// Fonction Ouverture et fermeture de la modale
 export function toggleModale() {
-    fermerModale()
-    ouvrirModale()
-}
+    let modal = null
+    const openModal = function (e) {
+        e.preventDefault()
+        const target = document.querySelector(e.target.getAttribute("href"))
+        target.style.display = null
+        target.removeAttribute("aria-hidden")
+        target.setAttribute("aria-modal", "true")
+        modal = target
+        modal.addEventListener("click", closeModal)
+        modal.querySelector(".js-modal-close").addEventListener("click", closeModal)
+        modal.querySelector(".js-modal-stop").addEventListener("click", stopPropagation)
+    }
 
-const modale = document.getElementById("modal")
-const titleModale = document.getElementById("title-modal")
-// Fonction Ouverture de la modale
-function ouvrirModale() {
-    const boutonModifier = document.getElementById("link-modif")
-    boutonModifier.addEventListener("click", openModal => {
-        openModal.preventDefault
-        modale.setAttribute("style", "display: flex;")
+    const closeModal = function (e) {
+        if(modal === null) return
+        e.preventDefault()
+        modal.style.display = "none"
+        modal.setAttribute("aria-hidden", "true")
+        modal.removeAttribute("aria-modal")
+        modal.removeEventListener("click", closeModal)
+        modal.querySelector(".js-modal-close").removeEventListener("click", closeModal)
+        modal.querySelector(".js-modal-stop").removeEventListener("click", stopPropagation)
+        modal = null
+    }
+
+    const stopPropagation = function(e) {
+        e.stopPropagation()
+    }
+    
+    document.querySelectorAll(".js-modal").forEach(a => {
+        a.addEventListener("click", openModal)
     })
 }
 
-// Fonction de fermeture de la modale
-function fermerModale() {
-    const iconFermer = document.getElementById("icon-fermer")
-    iconFermer.addEventListener("click" , closeModal => {
-        closeModal.preventDefault()
-        modale.setAttribute("style", "display: none;")
-    })
-}
-
-// Fonction de recherche des données des projets
-export function rechercherProjets(works) {
+// Fonction de génration des projets dans la modale
+export function genererProjetsModale(works) {
     for (let i=0; i<works.length; i++) {
         const projetIds = works[i].id
         const projetImg = works[i].imageUrl
@@ -99,8 +109,9 @@ export function rechercherProjets(works) {
     }
 }
 
-// Fonction d'édition pour la partie supprimer les traveaux
+// Fonction d'affichage des projets dans la modale
 const contentModale = document.getElementById("content-modal")
+const titleModale = document.getElementById("title-modal")
 const boutonAjouter = document.getElementById("btn-modal")
 function afficherGallery(projetImg, projetIds) {
     // Titre
@@ -136,7 +147,7 @@ function ecouterPoubelle() {
     })
 }
 
-// Fonction de Requête DELETE
+// Fonction de Requête DELETE des projets
 function envoyerDelete(projetId) {
     // Pop Up de confirmation de suppression
     let alertSuppression = confirm("Êtes-vous sûr de vouloir supprimer ce projet?")
@@ -179,7 +190,7 @@ function rafraichirModale() {
             return response.json()
         })
         .then(works => {
-            rechercherProjets(works)
+            genererProjetsModale(works)
             genererProjets(works)
         })
 }

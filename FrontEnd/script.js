@@ -1,4 +1,4 @@
-import {genererProjets, genererFiltres, rechercherProjets, toggleModale} from "./functions.js"
+import {genererProjets, genererFiltres, genererProjetsModale, toggleModale} from "./functions.js"
 import {verifierAuthentification} from "./authentified.js"
 
 // Requête des données depuis l'API
@@ -16,7 +16,7 @@ fetch("http://localhost:5678/api/works")
         genererFiltres(works)
         // modale
         toggleModale()
-        rechercherProjets(works)
+        genererProjetsModale(works)
     })
 
 verifierAuthentification()

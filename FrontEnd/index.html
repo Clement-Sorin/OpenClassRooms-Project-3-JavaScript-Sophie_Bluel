@@ -48,7 +48,7 @@
 		<div id="port-title">
 			<h2>Mes Projets</h2>
 			<div id="modif-hidden">
-				<a href="#modal" id="link-modif"><i class="fa-regular fa-pen-to-square"></i>  Modifier</a>
+				<a href="#modal" id="link-modif" class="js-modal"><i class="fa-regular fa-pen-to-square"></i>  Modifier</a>
 			</div>
 		</div>
 		<div class="filtres"></div>
@@ -78,9 +78,9 @@
 	</nav>
 </footer>
 <aside id="modal" aria-hidden="true" role="dialog" aria-labelledby="title-modal" aria-modal="true" style="display: none;">
-	<div id="modal-wrapper">
+	<div id="modal-wrapper" class="js-modal-stop">
 		<div id="div-icon-fermer">
-			<a id="icon-fermer"><i class="fa-solid fa-x"></i></a>
+			<a id="icon-fermer" class="js-modal-close"><i class="fa-solid fa-x"></i></a>
 		</div>
 		<h3 id="title-modal"></h3>
 		<div id="body-modal">
