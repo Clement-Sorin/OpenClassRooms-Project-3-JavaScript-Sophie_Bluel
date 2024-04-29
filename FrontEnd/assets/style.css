@@ -188,7 +188,7 @@ a, button, input[type="submit"]{
 	color: #1D6154
 }
 
-.btn-filtre:hover {
+.filter-selected {
 	background-color: #1D6154;
 	color: #fff;
 }
