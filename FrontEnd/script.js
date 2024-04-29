@@ -1,7 +1,9 @@
 const divProjets = document.querySelector(".gallery")
 const divFiltres = document.querySelector(".filtres")
-
-
+const logButton = document.getElementById("log")
+const token = window.localStorage.getItem("token")
+const divEdit = document.getElementById("div-edit-hidden")
+const divPortTitle = document.getElementById("modif-hidden")
 
 // Requête des données depuis l'API
 fetch("http://localhost:5678/api/works")
@@ -63,44 +65,14 @@ fetch("http://localhost:5678/api/works")
         openAjoutPhoto()
     })
 
-verifierAuthentification()
-
-
-function verifierAuthentification() {
-    const tokenLocalStorage = window.localStorage.getItem("token")
-    if (tokenLocalStorage) {
-        changerBoutonLogout()
-        genererBandeauEdit()
-        genererBoutonModifier()
-        cacherFiltres()
-    }
-}
-
-// Fonction de changement du bouton Login en Logout si authentifié
-function changerBoutonLogout() {
-    const logButton = document.getElementById("log")
-    logButton.innerText = "logout"
-    logButton.setAttribute("href", "")
+// Verification de l'authentification
+if (token) {
+    logButton.innerHTML = `<a href="" id="log">logout</a>`
     logButton.addEventListener("click", () => {
         window.localStorage.removeItem("token")
     })
-}
-
-// Fonction d'apparition du bandeau du mode édition
-function genererBandeauEdit() {
-    const divEdit = document.getElementById("div-edit-hidden")
     divEdit.id = "div-edit"
-}
-
-// Fonction d'apparition du bouton modifier
-function genererBoutonModifier() {
-    const divPortTitle = document.getElementById("modif-hidden") 
     divPortTitle.id = "modif"
-}
-
-// Fonction cacher les filtres
-function cacherFiltres() {
-    const divFiltres = document.querySelector(".filtres")
     divFiltres.classList.toggle("filtres-hidden")
 }
 

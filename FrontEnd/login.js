@@ -1,4 +1,3 @@
-// RegEx Champ d'email
 const champEmail = document.getElementById("email")
 const errorEmail = document.getElementById("email-error")
 const champPassword = document.getElementById("password")
@@ -7,6 +6,7 @@ const formulaires = document.getElementById("login-form")
 const loginError = document.getElementById("response-error")
 const requestError = document.getElementById("request-error")
 
+// RegEx Champ d'email
 champEmail.addEventListener("change", event => {
     const valeurEmail = event.target.value.trim()
     const regex = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+")
