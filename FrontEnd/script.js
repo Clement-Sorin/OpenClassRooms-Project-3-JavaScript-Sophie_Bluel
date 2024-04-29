@@ -7,6 +7,11 @@ const divPortTitle = document.getElementById("modif-hidden")
 const modal = document.getElementById("modal")
 const linkOpenModal = document.getElementById("link-modif")
 const linkCloseModal = document.getElementById("icon-fermer")
+const modalPartOne = document.getElementById("modal-part-1")
+const contentModale = document.getElementById("content-modal")
+const boutonAjouter = document.getElementById("btn-ajouter")
+const trashLink = document.querySelectorAll(".link-icon-trash")
+
 
 // Requête des données depuis l'API
 fetch("http://localhost:5678/api/works")
@@ -45,6 +50,7 @@ fetch("http://localhost:5678/api/works")
                 const categories = id.split(",")
                 const projetFiltres = works.filter(work => categories.includes(work.category.name))
                 let projetFiltresHTML = ""
+                let projectModalHTML = ""
                 projetFiltres.forEach(projet => {
                     projetFiltresHTML += `
                     <figure data-id="${projet.id}">
@@ -52,8 +58,17 @@ fetch("http://localhost:5678/api/works")
                         <figcaption>${projet.title}</figcaption>
                     </figure>
                     `
+                    projectModalHTML += `
+                    <div class="div-image-modal">
+                        <img class="img-modal" src="${projet.imageUrl}">
+                        <a id="${projet.id}" class="link-icon-trash">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </a>
+                    </div>
+                    `
                 })
                 divProjets.innerHTML = projetFiltresHTML
+                contentModale.innerHTML = projectModalHTML
             })
         })
         // Selection du filtre "tous" en premier
@@ -63,7 +78,7 @@ fetch("http://localhost:5678/api/works")
         }
 
         // modale
-        genererProjetsModale(works)
+        //genererProjetsModale(works)
         openAjoutPhoto()
     })
 
@@ -87,83 +102,36 @@ window.addEventListener("click", event => {
     }
 })
 
-function genererProjetsModale(works) {
-    for (let i=0; i<works.length; i++) {
-        const projetIds = works[i].id
-        const projetImg = works[i].imageUrl
-        afficherGallery(projetImg, projetIds)
-        ecouterPoubelle(projetImg, projetIds)
-    }
-}
-
-// Fonction d'affichage des projets dans la modale
-const contentModale = document.getElementById("content-modal")
-const bodyModal = document.getElementById("body-modal")
-const titleModale = document.getElementById("title-modal")
-const boutonAjouter = document.getElementById("btn-modal")
-function afficherGallery(projetImg, projetIds) {
-    // Titre
-    titleModale.innerText = "Galerie Photo"
-    // Images
-    const divImage = document.createElement("div")
-    divImage.classList.add("div-image-modal")
-    const imgProjets = document.createElement("img")
-    imgProjets.src = projetImg
-    imgProjets.classList.add("img-modal")
-    contentModale.appendChild(divImage)
-    divImage.appendChild(imgProjets)
-    // bouton supprimer sur l'image
-    const linkIcon = document.createElement("a")
-    linkIcon.classList.add("link-icon-trash")
-    linkIcon.id = projetIds
-    linkIcon.innerHTML = `<i class="fa-solid fa-trash-can"></i>`
-    divImage.appendChild(linkIcon)
-    // Bouton
-    boutonAjouter.setAttribute("style", "display: block;")
-    boutonAjouter.innerText = "Ajouter une photo"
-}
-
-// Fonction de suppression du projet
-function ecouterPoubelle() {
-    // Recherche de l'ID du projet à supprimer
-    const trashLink = document.querySelectorAll(".link-icon-trash")
-    trashLink.forEach(trashLink => {
-        trashLink.addEventListener("click", () => {
-            const projetId = trashLink.id
-            envoyerDelete(projetId)
-        })
+// Suppression des projets dans la modale
+trashLink.forEach(trashLink => {
+    trashLink.addEventListener("click", () => {
+        const projetId = trashLink.id
+        let alertSuppression = confirm("Êtes-vous sûr de vouloir supprimer ce projet?")
+        if(alertSuppression) {
+            const token = localStorage.getItem("token")
+            const headerDelete = {
+                "Authorization": "Bearer " + token
+            }
+            // Requête fetch avec method DELETE
+            try {
+                fetch(`http://localhost:5678/api/works/${projetId}`, {
+                    method: "DELETE",
+                    headers: headerDelete,
+                    body: projetId
+                }).then(response => {
+                    if (response.ok === false) {
+                        alert("Erreur de la requête HTTP")
+                    } else {
+                        rafraichirModale()
+                    }
+                })
+            } catch(error) {
+                console.error(error)
+                alert("Le projet n'a pas pu être supprimé")
+            }
+        } 
     })
-}
-
-// Fonction de Requête DELETE des projets
-function envoyerDelete(projetId) {
-    // Pop Up de confirmation de suppression
-    let alertSuppression = confirm("Êtes-vous sûr de vouloir supprimer ce projet?")
-    if(alertSuppression) {
-        // Préparation des données pour la requête
-        const token = localStorage.getItem("token")
-        const headerDelete = {
-            "Authorization": "Bearer " + token
-        }
-        // Requête fetch avec method DELETE
-        try {
-            fetch(`http://localhost:5678/api/works/${projetId}`, {
-                method: "DELETE",
-                headers: headerDelete,
-                body: projetId
-            }).then(response => {
-                if (response.ok === false) {
-                    alert("Erreur de la requête HTTP")
-                } else {
-                    rafraichirModale()
-                }
-            })
-        } catch(error) {
-            console.error(error)
-            alert("Le projet n'a pas pu être supprimé")
-        }
-    } 
-}
+})
 
 // Fonction de rafraîchissement de la modale
 function rafraichirModale() {

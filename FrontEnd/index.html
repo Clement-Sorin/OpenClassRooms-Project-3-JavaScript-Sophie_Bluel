@@ -78,14 +78,24 @@
 	</nav>
 </footer>
 <dialog id="modal">
-	<div id="div-icon-fermer">
-		<a id="icon-fermer" class="js-modal-close"><i class="fa-solid fa-x"></i></a>
-	</div>
-	<h3 id="title-modal"></h3>
-	<div id="body-modal">
-		<div id="content-modal"></div>
+	<div id="modal-part-1">
+		<div id="div-icon-fermer" style="display:block;">
+			<a id="icon-fermer" class="js-modal-close"><i class="fa-solid fa-x"></i></a>
+		</div>
+		<h3 id="title-modal">Galerie Photo</h3>
+			<div id="content-modal"></div>
 		<div id="div-btn-modal">
-			<button id="btn-modal" style="display: none;"></button>
+			<button id="btn-ajouter">Ajouter une photo</button>
+		</div>
+	</div>
+	<div id="modal-part-2" style="display:none;">
+		<div id="div-icon-fermer">
+			<a id="icon-fermer" class="js-modal-close"><i class="fa-solid fa-x"></i></a>
+		</div>
+		<h3 id="title-modal">Ajout photo</h3>
+			<div id="content-modal"></div>
+		<div id="div-btn-modal">
+			<button id="btn-modal">Valider</button>
 		</div>
 	</div>
 </dialog>

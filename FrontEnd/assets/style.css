@@ -386,7 +386,7 @@ footer nav ul {
 	justify-content: center;
 }
 
-#btn-modal, #btn-valider-ajouter-photo {
+#btn-ajouter, #btn-valider-ajouter-photo {
 	padding: 8px 0;
 	width: 327px;
 	margin-top: 30px;
