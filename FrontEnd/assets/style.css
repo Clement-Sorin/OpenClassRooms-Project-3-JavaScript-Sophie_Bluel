@@ -322,10 +322,6 @@ footer nav ul {
 /******* MODAL *******/
 
 #modal {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
 	width: 630px;
 	padding: 50px;
 	max-width: calc(80vw - 50px);

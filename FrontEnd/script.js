@@ -11,7 +11,6 @@ const modalPartOne = document.getElementById("modal-part-1")
 const contentModale = document.getElementById("content-modal")
 const boutonAjouter = document.getElementById("btn-ajouter")
 
-
 // Requête des données depuis l'API
 fetch("http://localhost:5678/api/works")
     .then(response => {
@@ -68,7 +67,6 @@ fetch("http://localhost:5678/api/works")
                 })
                 divProjets.innerHTML = projetFiltresHTML
                 contentModale.innerHTML = projectModalHTML
-                // Suppression des projets
                 const trashLink = document.querySelectorAll(".link-icon-trash")
                 supprimerProjets(trashLink)
             })
@@ -78,10 +76,6 @@ fetch("http://localhost:5678/api/works")
             btnFiltres[i].click()
             break
         }
-
-        // modale
-        //genererProjetsModale(works)
-        openAjoutPhoto()
     })
 
 // Verification de l'authentification
@@ -107,13 +101,12 @@ window.addEventListener("click", event => {
 // Suppression des projets dans la modale
 function supprimerProjets(trashLink) {
     trashLink.forEach(link => {
-        link.addEventListener("click", () => {
+        link.addEventListener("click", (event) => {
+            event.preventDefault()
             const projetId = link.id
             const divProjetId = document.querySelectorAll(`[data-id="${projetId}"]`)
-            console.log(divProjetId)
             let alertSuppression = confirm("Êtes-vous sûr de vouloir supprimer ce projet?")
             if(alertSuppression) {
-                const token = localStorage.getItem("token")
                 const headerDelete = {
                     "Authorization": "Bearer " + token
                 }
@@ -139,7 +132,7 @@ function supprimerProjets(trashLink) {
             } 
         })
     })
-} 
+}
 
 // Fonction d'ouverture de la modale partie 2 (Ajout Photo)
 export function openAjoutPhoto() {
