@@ -350,6 +350,10 @@ footer nav ul {
 	width: 100%;
 }
 
+#icon-fermer {
+	width: 100%;
+}
+
 #icon-retour {
 	font-size: 1.3rem;
 }
@@ -425,7 +429,7 @@ footer nav ul {
 	gap: 20px;
 }
 
-#div-ajouter-photo {
+#div-ajouter-photo, #apecu-photo{
 	width: 420px;
 	height: 170px;
 	background-color: #e8f1f6;
@@ -434,6 +438,10 @@ footer nav ul {
 	align-items: center;
 	justify-content: center;
 	gap: 10px;
+}
+
+#img-apercu {
+	height: 170px;
 }
 
 .fa-image {

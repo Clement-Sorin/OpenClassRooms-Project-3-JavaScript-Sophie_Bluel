@@ -100,10 +100,12 @@
 					<i class="fa-regular fa-image"></i>
 					<button id="btn-input-file">
 						<label for="file-input" class="custom-file-input">+ Ajouter Photo</label>
-						<input type="file" id="file-input" required>
+						<input type="file" id="file-input" accept=".png, .jpg" required>
 					</button>
 					<p>jpg, png: 4mo max</p>
 				</div>
+				<div id="apecu-photo" style="display: none;"></div>
+				<p class="error" id="file-size-error" style="display: none;">La taille du fichier est trop volumineuse</p>
 				<div id="div-titre-ajouter-photo">
 					<label for="input-titre-ajouter-photo">Titre</label>
 					<input type="text" id="input-titre-ajouter-photo" name="title" required>

@@ -12,6 +12,10 @@ const modalPartOne = document.getElementById("modal-part-1")
 const modalPartTwo = document.getElementById("modal-part-2")
 const contentModale = document.getElementById("gallery-modal")
 const boutonAjouter = document.getElementById("btn-ajouter")
+const inputFile = document.getElementById("file-input")
+const errorFileSize = document.getElementById("file-size-error")
+const divAjoutPhoto = document.getElementById("div-ajouter-photo")
+const divApercuPhoto = document.getElementById("apecu-photo")
 
 // Requête des données depuis l'API
 fetch("http://localhost:5678/api/works")
@@ -174,4 +178,28 @@ function chercherCategories() {
 linkBack.addEventListener("click", () => {
     modalPartOne.setAttribute("style", "")
     modalPartTwo.setAttribute("style", "display:none;")
+})
+
+// Apperçu de l'image lors de l'input file
+inputFile.addEventListener("change", (event) => {
+    errorFileSize.setAttribute("style", "display:none;")
+    const fileData = event.target.files
+    const maxSize = 4194304
+    for(let i=0; i<fileData.length; i++) {
+        const file = fileData[i]
+        const pathFile = URL.createObjectURL(file)
+        if(file.size >= maxSize) {
+            errorFileSize.setAttribute("style", "")
+            event.target.value = ""
+            return
+        }
+        else {
+            console.log(file)
+            divAjoutPhoto.setAttribute("style", "display: none;")
+            divApercuPhoto.setAttribute("style", "")
+            divApercuPhoto.innerHTML = `
+                <img id="img-apercu" src="${pathFile}" alt="${file.name}"></img>
+            `
+        }
+    }
 })
