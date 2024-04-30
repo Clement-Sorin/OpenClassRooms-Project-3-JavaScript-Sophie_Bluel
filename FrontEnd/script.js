@@ -7,6 +7,7 @@ const divPortTitle = document.getElementById("modif-hidden")
 const modal = document.getElementById("modal")
 const linkOpenModal = document.getElementById("link-modif")
 const linkCloseModal = document.querySelectorAll(".icon-fermer")
+const linkBack = document.getElementById("icon-retour")
 const modalPartOne = document.getElementById("modal-part-1")
 const modalPartTwo = document.getElementById("modal-part-2")
 const contentModale = document.getElementById("gallery-modal")
@@ -91,7 +92,11 @@ if (token) {
 }
 
 // Ouverture et fermeture de la modale
-linkOpenModal.addEventListener("click", () => {modal.showModal()})
+linkOpenModal.addEventListener("click", () => {
+    modal.showModal()
+    modalPartOne.setAttribute("style", "")
+    modalPartTwo.setAttribute("style", "display:none;")
+})
 linkCloseModal.forEach(link => {
     link.addEventListener("click", () => {modal.close()})
 })
@@ -145,7 +150,6 @@ boutonAjouter.addEventListener("click", (e) => {
     chercherCategories()
 })
 
-
 // Fonction d'ajout du contenu sur la partie Ajout Photo de la modale
 function chercherCategories() {
     const selectCategories = document.getElementById("input-categorie-ajouter-photo")
@@ -165,3 +169,9 @@ function chercherCategories() {
         })
     })
 }
+
+// Retour sur la modale part 1
+linkBack.addEventListener("click", () => {
+    modalPartOne.setAttribute("style", "")
+    modalPartTwo.setAttribute("style", "display:none;")
+})
