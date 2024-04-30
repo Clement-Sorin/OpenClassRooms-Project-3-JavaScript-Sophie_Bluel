@@ -421,6 +421,19 @@ footer nav ul {
 	color: #1D6154;
 }
 
+#fake-button-valider {
+	margin-top: 10px;
+	padding: 10px 0;
+	width: 327px;
+	border: 1px solid #A7A7A7;
+	background-color: #A7A7A7;
+	color: #fff;
+	text-align: center;
+	border-radius: 60px;
+  	font-family: 'Syne';
+  	font-size: 16px;
+}
+
 #form-ajout-photo {
 	display: flex;
 	flex-direction: column;

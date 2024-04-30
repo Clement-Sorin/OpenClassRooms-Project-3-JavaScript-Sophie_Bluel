@@ -12,10 +12,15 @@ const modalPartOne = document.getElementById("modal-part-1")
 const modalPartTwo = document.getElementById("modal-part-2")
 const contentModale = document.getElementById("gallery-modal")
 const boutonAjouter = document.getElementById("btn-ajouter")
+const formProjets = document.getElementById("form-ajout-photo")
 const inputFile = document.getElementById("file-input")
 const errorFileSize = document.getElementById("file-size-error")
 const divAjoutPhoto = document.getElementById("div-ajouter-photo")
 const divApercuPhoto = document.getElementById("apecu-photo")
+const inputTitre = document.getElementById("input-titre-ajouter-photo")
+const selectCategory = document.getElementById("input-categorie-ajouter-photo")
+const btnValiderAjouterPhoto = document.getElementById("btn-valider-ajouter-photo")
+const fakeBtn = document.getElementById("fake-button-valider")
 
 // Requête des données depuis l'API
 fetch("http://localhost:5678/api/works")
@@ -180,7 +185,8 @@ linkBack.addEventListener("click", () => {
     modalPartTwo.setAttribute("style", "display:none;")
 })
 
-// Apperçu de l'image lors de l'input file
+// Aperçu de l'image lors de l'input file et erreur si le fichier est trop volumineux
+if(inputFile.value) {inputFile.value = ""}
 inputFile.addEventListener("change", (event) => {
     errorFileSize.setAttribute("style", "display:none;")
     const fileData = event.target.files
@@ -194,12 +200,22 @@ inputFile.addEventListener("change", (event) => {
             return
         }
         else {
-            console.log(file)
             divAjoutPhoto.setAttribute("style", "display: none;")
             divApercuPhoto.setAttribute("style", "")
             divApercuPhoto.innerHTML = `
                 <img id="img-apercu" src="${pathFile}" alt="${file.name}"></img>
             `
         }
+    }
+})
+
+// Vérification des valeurs du formulaire
+formProjets.addEventListener("input", () => {
+    if(inputFile.value && inputTitre.value && selectCategory.value){
+        btnValiderAjouterPhoto.setAttribute("style", "")
+        fakeBtn.setAttribute("style", "display: none;")
+    } else {
+        btnValiderAjouterPhoto.setAttribute("style", "display: none;")
+        fakeBtn.setAttribute("style", "")
     }
 })
