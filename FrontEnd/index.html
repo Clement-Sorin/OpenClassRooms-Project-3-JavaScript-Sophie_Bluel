@@ -80,22 +80,42 @@
 <dialog id="modal">
 	<div id="modal-part-1">
 		<div id="div-icon-fermer">
-			<a id="icon-fermer" class="js-modal-close"><i class="fa-solid fa-x"></i></a>
+			<a class="icon-fermer" class="js-modal-close"><i class="fa-solid fa-x"></i></a>
 		</div>
 		<h3 id="title-modal">Galerie Photo</h3>
-			<div id="content-modal"></div>
+			<div id="gallery-modal"></div>
 		<div id="div-btn-modal">
 			<button id="btn-ajouter">Ajouter une photo</button>
 		</div>
 	</div>
 	<div id="modal-part-2" style="display:none;">
-		<div id="div-icon-fermer">
-			<a id="icon-fermer" class="js-modal-close"><i class="fa-solid fa-x"></i></a>
+		<div id="div-icon-fermer-pt2">
+			<a id="icon-retour"><i class="fa-solid fa-arrow-left"></i></a>
+			<a class="icon-fermer"><i class="fa-solid fa-x"></i></a>
 		</div>
 		<h3 id="title-modal">Ajout photo</h3>
-			<div id="content-modal"></div>
-		<div id="div-btn-modal">
-			<button id="btn-modal">Valider</button>
+		<div id="content-modal">
+			<form action="" id="form-ajout-photo">
+				<div id="div-ajouter-photo">
+					<i class="fa-regular fa-image"></i>
+					<button id="btn-input-file">
+						<label for="file-input" class="custom-file-input">+ Ajouter Photo</label>
+						<input type="file" id="file-input" required>
+					</button>
+					<p>jpg, png: 4mo max</p>
+				</div>
+				<div id="div-titre-ajouter-photo">
+					<label for="input-titre-ajouter-photo">Titre</label>
+					<input type="text" id="input-titre-ajouter-photo" name="title" required>
+				</div>
+				<div id="div-categorie-ajouter-photo">
+					<label for="categorie-ajouter-photo">Catégorie</label>
+					<select name="category" id="input-categorie-ajouter-photo" required></select>
+				</div>
+				<div id="div-bouton-ajouter-photo">
+					<button type="submit" id="btn-valider-ajouter-photo">Valider</button>
+				</div>
+			</form>
 		</div>
 	</div>
 </dialog>
