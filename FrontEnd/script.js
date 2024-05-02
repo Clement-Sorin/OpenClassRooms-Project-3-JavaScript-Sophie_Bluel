@@ -238,6 +238,12 @@ btnValiderAjouterPhoto.addEventListener("click", (e) => {
             headers: headerFetch
         }).then(response => {
             if (!response.ok) {alert("Erreur de la requête HTTP")} 
+            else {
+                alert("Le projet a été correctement ajouté")
+                formProjets.reset()
+                divAjoutPhoto.setAttribute("style", "")
+                divApercuPhoto.setAttribute("style", "display: none;")
+            }
         })
     } catch(error) {
         console.error(error)
