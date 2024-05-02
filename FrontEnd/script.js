@@ -2,6 +2,10 @@ const divProjets = document.querySelector(".gallery")
 const divFiltres = document.querySelector(".filtres")
 const logButton = document.getElementById("log")
 const token = window.localStorage.getItem("token")
+const headerFetch = {
+    "Authorization": "Bearer " + token,
+    "Accept": "application/json"
+}
 const divEdit = document.getElementById("div-edit-hidden")
 const divPortTitle = document.getElementById("modif-hidden")
 const modal = document.getElementById("modal")
@@ -21,6 +25,7 @@ const inputTitre = document.getElementById("input-titre-ajouter-photo")
 const selectCategory = document.getElementById("input-categorie-ajouter-photo")
 const btnValiderAjouterPhoto = document.getElementById("btn-valider-ajouter-photo")
 const fakeBtn = document.getElementById("fake-button-valider")
+const errorForm = document.getElementById("error-form")
 
 // Requête des données depuis l'API
 fetch("http://localhost:5678/api/works")
@@ -124,14 +129,11 @@ function supprimerProjets(trashLink) {
             const divProjetId = document.querySelectorAll(`[data-id="${projetId}"]`)
             let alertSuppression = confirm("Êtes-vous sûr de vouloir supprimer ce projet?")
             if(alertSuppression) {
-                const headerDelete = {
-                    "Authorization": "Bearer " + token
-                }
                 // Requête fetch avec method DELETE
                 try {
                     fetch(`http://localhost:5678/api/works/${projetId}`, {
                         method: "DELETE",
-                        headers: headerDelete,
+                        headers: headerFetch,
                         body: projetId
                     }).then(response => {
                         if (response.ok === false) {
@@ -217,5 +219,28 @@ formProjets.addEventListener("input", () => {
     } else {
         btnValiderAjouterPhoto.setAttribute("style", "display: none;")
         fakeBtn.setAttribute("style", "")
+    }
+})
+// Message d'erreur si mauvais remplissage des champs
+fakeBtn.addEventListener("click", () => {
+    alert("Les champs ne sont pas correctement remplis")
+})
+
+// Méthode POST sur les nouveaux projets
+btnValiderAjouterPhoto.addEventListener("click", (e) => {
+    e.preventDefault()
+    const formData = new FormData(formProjets)
+    console.log(formData)
+    try {
+        fetch("http://localhost:5678/api/works", {
+            method: "POST",
+            body: formData,
+            headers: headerFetch
+        }).then(response => {
+            if (!response.ok) {alert("Erreur de la requête HTTP")} 
+        })
+    } catch(error) {
+        console.error(error)
+        alert("Le projet n'a pas pu être ajouté")
     }
 })
