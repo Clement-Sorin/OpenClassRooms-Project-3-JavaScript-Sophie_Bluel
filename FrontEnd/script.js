@@ -25,7 +25,6 @@ const inputTitre = document.getElementById("input-titre-ajouter-photo")
 const selectCategory = document.getElementById("input-categorie-ajouter-photo")
 const btnValiderAjouterPhoto = document.getElementById("btn-valider-ajouter-photo")
 const fakeBtn = document.getElementById("fake-button-valider")
-const errorForm = document.getElementById("error-form")
 
 // Requête des données depuis l'API
 fetch("http://localhost:5678/api/works")
@@ -67,7 +66,7 @@ fetch("http://localhost:5678/api/works")
                 let projectModalHTML = ""
                 projetFiltres.forEach(projet => {
                     projetFiltresHTML += `
-                    <figure data-id="${projet.id}">
+                    <figure data-id="${projet.id}" class="fig-project">
                         <img src="${projet.imageUrl}" alt="${projet.title}">
                         <figcaption>${projet.title}</figcaption>
                     </figure>
@@ -268,4 +267,3 @@ btnValiderAjouterPhoto.addEventListener("click", (e) => {
         alert("Le projet n'a pas pu être ajouté")
     }
 })
-
