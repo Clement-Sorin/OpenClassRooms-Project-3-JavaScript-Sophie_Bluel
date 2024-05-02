@@ -268,10 +268,18 @@ input[type="submit"] {
 	color: #1D6154;
 } 
 
-footer nav ul {
+footer {
+	height: 60px;
+	background-color: #fff;
+	width: 100%;
+}
+
+footer a {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+	height: 100%;
+	align-items: center;
+	margin-right: 60px
 }
 
 /*******LOGIN PAGE*******/

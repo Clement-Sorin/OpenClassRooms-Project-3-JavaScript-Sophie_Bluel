@@ -45,7 +45,7 @@ formulaires.addEventListener("submit", event => {
         }
     }).then(({token}) => {
         window.localStorage.setItem("token", token)
-        window.location.href = "index.html"
+        window.location.href = "../../index.html"
     }).catch(() => {
         requestError.setAttribute("style", "display: block;")
     })
