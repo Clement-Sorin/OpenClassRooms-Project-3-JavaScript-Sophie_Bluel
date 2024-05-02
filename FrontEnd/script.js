@@ -140,7 +140,7 @@ function supprimerProjets(trashLink) {
                             alert("Erreur de la requête HTTP")
                         } else {
                             divProjetId.forEach(block => {
-                                block.innerHTML = ""
+                                block.remove()
                             })
                         }
                     })
@@ -230,7 +230,6 @@ fakeBtn.addEventListener("click", () => {
 btnValiderAjouterPhoto.addEventListener("click", (e) => {
     e.preventDefault()
     const formData = new FormData(formProjets)
-    console.log(formData)
     try {
         fetch("http://localhost:5678/api/works", {
             method: "POST",
@@ -240,6 +239,25 @@ btnValiderAjouterPhoto.addEventListener("click", (e) => {
             if (!response.ok) {alert("Erreur de la requête HTTP")} 
             else {
                 alert("Le projet a été correctement ajouté")
+                const image = formData.get('image')
+                const urlImage = URL.createObjectURL(image)
+                console.log(urlImage)
+                const newProjectHTML = `
+                <figure data-id="">
+                    <img src="${urlImage}" alt="${inputTitre.value}">
+                    <figcaption>${inputTitre.value}</figcaption>
+                </figure>
+                `
+                const newProjectModalHTML = `
+                <div data-id="" class="div-image-modal">
+                    <img class="img-modal" src="${urlImage}">
+                    <a id="" class="link-icon-trash">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </a>
+                </div>
+                `
+                divProjets.innerHTML += newProjectHTML
+                contentModale.innerHTML += newProjectModalHTML
                 formProjets.reset()
                 divAjoutPhoto.setAttribute("style", "")
                 divApercuPhoto.setAttribute("style", "display: none;")
@@ -250,3 +268,4 @@ btnValiderAjouterPhoto.addEventListener("click", (e) => {
         alert("Le projet n'a pas pu être ajouté")
     }
 })
+
