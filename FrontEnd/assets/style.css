@@ -95,7 +95,6 @@ h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-;
 }
 
 h2{
@@ -104,12 +103,14 @@ h2{
 	font-size: 30px;
 	color: #1D6154
 }
+
 nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
 
 }
+
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
@@ -132,9 +133,11 @@ a, button, input[type="submit"]{
 	display: flex;
 	align-items: center;
 }
+
 #introduction figure {
 	flex: 1
 }
+
 #introduction img {
 	display: block;
 	margin: auto;
@@ -144,6 +147,7 @@ a, button, input[type="submit"]{
 #introduction article {
 	flex: 1
 }
+
 #introduction h2 {
 	margin-bottom: 1em;
 }
@@ -168,17 +172,17 @@ a, button, input[type="submit"]{
 	display: none;
 }
 
-.filtres {
+.filters {
 	display: flex;
 	justify-content: center;
 	gap: 10px;
 }
 
-.filtres-hidden {
+.filters-hidden {
 	display: none;
 }
 
-.btn-filtre, #login-form button{
+.btn-filter, #login-form button{
 	padding: 8px 15px;
 	border: 1px solid #1D6154;
 	background-color: #FFFEF8;
@@ -216,11 +220,12 @@ figcaption {
 }
 #contact > * {
 	text-align: center;
-
 }
+
 #contact h2{
 	margin-bottom: 20px;
 }
+
 #contact form {
 	text-align: left;
 	margin-top:30px;
@@ -228,7 +233,7 @@ figcaption {
 	flex-direction: column;
 }
 
-#contact input, #email, #password, #input-titre-ajouter-photo, #input-categorie-ajouter-photo {
+#contact input, #email, #password, #input-title-add-img, #input-category-add-img {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
@@ -346,23 +351,23 @@ footer a {
 	align-items: center;
 }
 
-#div-icon-fermer {
+#div-icon-close {
 	display: flex;
 	justify-content: flex-end;
 	width: 100%;
 }
 
-#div-icon-fermer-pt2 {
+#div-icon-close-pt2 {
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
 }
 
-#icon-fermer {
+#icon-close {
 	width: 100%;
 }
 
-#icon-retour {
+#icon-back {
 	font-size: 1.3rem;
 }
 
@@ -385,7 +390,7 @@ footer a {
 	gap: 20px;
 }
 
-.div-image-modal {
+.div-img-modal {
 	position: relative;
 }
 
@@ -412,7 +417,7 @@ footer a {
 	justify-content: center;
 }
 
-#btn-ajouter, #btn-valider-ajouter-photo {
+#btn-add, #btn-submit-add-img {
 	padding: 8px 0;
 	width: 327px;
 	margin-top: 30px;
@@ -424,12 +429,12 @@ footer a {
 	color: #FFFEF8;
 }
 
-#btn-modal:hover, #btn-valider-ajouter-photo:hover  {
+#btn-modal:hover, #btn-submit-add-img:hover  {
 	background-color: #FFFEF8;
 	color: #1D6154;
 }
 
-#fake-button-valider {
+#fake-btn-submit {
 	margin-top: 10px;
 	padding: 10px 0;
 	width: 327px;
@@ -442,7 +447,7 @@ footer a {
   	font-size: 16px;
 }
 
-#form-ajout-photo {
+#form-add-img {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -450,7 +455,7 @@ footer a {
 	gap: 20px;
 }
 
-#div-ajouter-photo, #apecu-photo{
+#div-add-img, #preview-img{
 	width: 420px;
 	height: 170px;
 	background-color: #e8f1f6;
@@ -461,7 +466,7 @@ footer a {
 	gap: 10px;
 }
 
-#img-apercu {
+#img-preview {
 	height: 170px;
 }
 
@@ -500,23 +505,23 @@ footer a {
 	z-index: 0;
 }
 
-#div-titre-ajouter-photo, #div-categorie-ajouter-photo {
+#div-title-add-img, #div-category-add-img {
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
 	width: 420px;
 }
 
-#input-categorie-ajouter-photo {
+#input-category-add-img {
 	background-color: #fff;
 	border: none;
 }
 
-#div-categorie-ajouter-photo {
+#div-category-add-img {
 	padding-bottom: 30px;
 	border-bottom: solid 1px #B3B3B3;
 }
 
-#btn-valider-ajouter-photo {
+#btn-submit-add-img {
 	margin-top: 10px;
 }

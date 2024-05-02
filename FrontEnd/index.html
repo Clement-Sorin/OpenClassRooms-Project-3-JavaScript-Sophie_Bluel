@@ -51,7 +51,7 @@
 				<a href="#modal" id="link-modif" class="js-modal"><i class="fa-regular fa-pen-to-square"></i>  Modifier</a>
 			</div>
 		</div>
-		<div class="filtres"></div>
+		<div class="filters"></div>
 		<div class="gallery">
 		</div>
 	</section>
@@ -75,24 +75,24 @@
 </footer>
 <dialog id="modal">
 	<div id="modal-part-1">
-		<div id="div-icon-fermer">
-			<a class="icon-fermer" class="js-modal-close"><i class="fa-solid fa-x"></i></a>
+		<div id="div-icon-close">
+			<a class="icon-close" class="js-modal-close"><i class="fa-solid fa-x"></i></a>
 		</div>
 		<h3 id="title-modal">Galerie Photo</h3>
 			<div id="gallery-modal"></div>
 		<div id="div-btn-modal">
-			<button id="btn-ajouter">Ajouter une photo</button>
+			<button id="btn-add">Ajouter une photo</button>
 		</div>
 	</div>
 	<div id="modal-part-2" style="display:none;">
-		<div id="div-icon-fermer-pt2">
-			<a id="icon-retour"><i class="fa-solid fa-arrow-left"></i></a>
-			<a class="icon-fermer"><i class="fa-solid fa-x"></i></a>
+		<div id="div-icon-close-pt2">
+			<a id="icon-back"><i class="fa-solid fa-arrow-left"></i></a>
+			<a class="icon-close"><i class="fa-solid fa-x"></i></a>
 		</div>
 		<h3 id="title-modal">Ajout photo</h3>
 		<div id="content-modal">
-			<form id="form-ajout-photo">
-				<div id="div-ajouter-photo">
+			<form id="form-add-img">
+				<div id="div-add-img">
 					<i class="fa-regular fa-image"></i>
 					<button id="btn-input-file">
 						<label for="file-input" class="custom-file-input">+ Ajouter Photo</label>
@@ -100,19 +100,19 @@
 					</button>
 					<p>jpg, png: 4mo max</p>
 				</div>
-				<div id="apecu-photo" style="display: none;"></div>
+				<div id="preview-img" style="display: none;"></div>
 				<p class="error" id="file-size-error" style="display: none;">La taille du fichier est trop volumineuse</p>
-				<div id="div-titre-ajouter-photo">
-					<label for="input-titre-ajouter-photo">Titre</label>
-					<input type="text" id="input-titre-ajouter-photo" name="title" required>
+				<div id="div-title-add-img">
+					<label for="input-title-add-img">Titre</label>
+					<input type="text" id="input-title-add-img" name="title" required>
 				</div>
-				<div id="div-categorie-ajouter-photo">
-					<label for="categorie-ajouter-photo">Catégorie</label>
-					<select name="category" id="input-categorie-ajouter-photo" required></select>
+				<div id="div-category-add-img">
+					<label for="category-add-img">Catégorie</label>
+					<select name="category" id="input-category-add-img" required></select>
 				</div>
-				<div id="div-bouton-ajouter-photo">
-					<button type="submit" id="btn-valider-ajouter-photo" style="display: none;">Valider</button>
-					<button id="fake-button-valider">Valider</button>
+				<div>
+					<button type="submit" id="btn-submit-add-img" style="display: none;">Valider</button>
+					<button id="fake-btn-submit">Valider</button>
 				</div>
 			</form>
 		</div>

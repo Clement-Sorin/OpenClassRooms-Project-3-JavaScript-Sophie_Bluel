@@ -1,5 +1,5 @@
-const divProjets = document.querySelector(".gallery")
-const divFiltres = document.querySelector(".filtres")
+const divProjects = document.querySelector(".gallery")
+const divFilters = document.querySelector(".filters")
 const logButton = document.getElementById("log")
 const token = window.localStorage.getItem("token")
 const headerFetch = {
@@ -10,90 +10,89 @@ const divEdit = document.getElementById("div-edit-hidden")
 const divPortTitle = document.getElementById("modif-hidden")
 const modal = document.getElementById("modal")
 const linkOpenModal = document.getElementById("link-modif")
-const linkCloseModal = document.querySelectorAll(".icon-fermer")
-const linkBack = document.getElementById("icon-retour")
+const linkCloseModal = document.querySelectorAll(".icon-close")
+const linkBack = document.getElementById("icon-back")
 const modalPartOne = document.getElementById("modal-part-1")
 const modalPartTwo = document.getElementById("modal-part-2")
-const contentModale = document.getElementById("gallery-modal")
-const boutonAjouter = document.getElementById("btn-ajouter")
-const formProjets = document.getElementById("form-ajout-photo")
+const contentModal = document.getElementById("gallery-modal")
+const buttonAdd = document.getElementById("btn-add")
+const formProjects = document.getElementById("form-add-img")
 const inputFile = document.getElementById("file-input")
 const errorFileSize = document.getElementById("file-size-error")
-const divAjoutPhoto = document.getElementById("div-ajouter-photo")
-const divApercuPhoto = document.getElementById("apecu-photo")
-const inputTitre = document.getElementById("input-titre-ajouter-photo")
-const selectCategory = document.getElementById("input-categorie-ajouter-photo")
-const btnValiderAjouterPhoto = document.getElementById("btn-valider-ajouter-photo")
-const fakeBtn = document.getElementById("fake-button-valider")
+const divAddImage = document.getElementById("div-add-img")
+const divPreviewImage = document.getElementById("preview-img")
+const inputTitle = document.getElementById("input-title-add-img")
+const selectCategory = document.getElementById("input-category-add-img")
+const btnSubmitAddImage = document.getElementById("btn-submit-add-img")
+const fakeBtn = document.getElementById("fake-btn-submit")
 
-// Requête des données depuis l'API
+// Data request from API
 fetch("http://localhost:5678/api/works")
     .then(response => {
         if (response.ok === false) {
             throw new Error("Erreur de la requête HTTP")
         }
-
         return response.json()
     })
     .then(works => {
-        // Générer les filtres dans le DOM
-        const nomCategorie = new Set()
+        // Filters generation in DOM
+        const categoryName = new Set()
         works.forEach(categories => {
-            nomCategorie.add(categories.category.name)
+            categoryName.add(categories.category.name)
         })
-        const tableCategories = Array.from(nomCategorie)
-        let filtreHTML = ""
-        filtreHTML = `<button id="${tableCategories}" class="btn-filtre">Tous</button>`
-        tableCategories.forEach(filtre => {
-            filtreHTML += `
-            <button id="${filtre}" class="btn-filtre">${filtre}</button>
+        const tableCategories = Array.from(categoryName)
+        let filterHTML = ""
+        filterHTML = `<button id="${tableCategories}" class="btn-filter">Tous</button>`
+        tableCategories.forEach(filter => {
+            filterHTML += `
+            <button id="${filter}" class="btn-filter">${filter}</button>
             `
         })
-        divFiltres.innerHTML = filtreHTML
+        divFilters.innerHTML = filterHTML
 
-        // Génération des projets par filtres
-        const btnFiltres = document.querySelectorAll(".btn-filtre")
-        btnFiltres.forEach(filtre => {
-            filtre.addEventListener("click", () => {
-                btnFiltres.forEach(btn => {
+        // Projects display by filters in DOM
+        const btnFilters = document.querySelectorAll(".btn-filter")
+        btnFilters.forEach(filter => {
+            filter.addEventListener("click", () => {
+                btnFilters.forEach(btn => {
                     btn.classList.remove("filter-selected")
                 })
-                filtre.classList.add("filter-selected")
-                const id = filtre.id
+                filter.classList.add("filter-selected")
+                const id = filter.id
                 const categories = id.split(",")
-                const projetFiltres = works.filter(work => categories.includes(work.category.name))
-                let projetFiltresHTML = ""
+                const projectfilters = works.filter(work => categories.includes(work.category.name))
+                let projectfiltersHTML = ""
                 let projectModalHTML = ""
-                projetFiltres.forEach(projet => {
-                    projetFiltresHTML += `
-                    <figure data-id="${projet.id}" class="fig-project">
-                        <img src="${projet.imageUrl}" alt="${projet.title}">
-                        <figcaption>${projet.title}</figcaption>
+                projectfilters.forEach(project => {
+                    projectfiltersHTML += `
+                    <figure data-id="${project.id}" class="fig-project">
+                        <img src="${project.imageUrl}" alt="${project.title}">
+                        <figcaption>${project.title}</figcaption>
                     </figure>
                     `
                     projectModalHTML += `
-                    <div data-id="${projet.id}" class="div-image-modal">
-                        <img class="img-modal" src="${projet.imageUrl}">
-                        <a id="${projet.id}" class="link-icon-trash">
+                    <div data-id="${project.id}" class="div-img-modal">
+                        <img class="img-modal" src="${project.imageUrl}">
+                        <a id="${project.id}" class="link-icon-trash">
                             <i class="fa-solid fa-trash-can"></i>
                         </a>
                     </div>
                     `
                 })
-                divProjets.innerHTML = projetFiltresHTML
-                contentModale.innerHTML = projectModalHTML
+                divProjects.innerHTML = projectfiltersHTML
+                contentModal.innerHTML = projectModalHTML
                 const trashLink = document.querySelectorAll(".link-icon-trash")
-                supprimerProjets(trashLink)
+                deleteProject(trashLink)
             })
         })
-        // Selection du filtre "tous" en premier
-        for(let i=0; i<btnFiltres.length; i++) {
-            btnFiltres[i].click()
+        // First filter selection on page load (all categories)
+        for(let i=0; i<btnFilters.length; i++) {
+            btnFilters[i].click()
             break
         }
     })
 
-// Verification de l'authentification
+// Auth verification
 if (token) {
     logButton.innerHTML = `<a href="" id="log">logout</a>`
     logButton.addEventListener("click", () => {
@@ -101,10 +100,10 @@ if (token) {
     })
     divEdit.id = "div-edit"
     divPortTitle.id = "modif"
-    divFiltres.classList.toggle("filtres-hidden")
+    divFilters.classList.toggle("filters-hidden")
 }
 
-// Ouverture et fermeture de la modale
+// Open and close modal fonctionnality
 linkOpenModal.addEventListener("click", () => {
     modal.showModal()
     modalPartOne.setAttribute("style", "")
@@ -119,50 +118,50 @@ window.addEventListener("click", event => {
     }
 })
 
-// Suppression des projets dans la modale
-function supprimerProjets(trashLink) {
+// Open the modal Part 2 (add project)
+buttonAdd.addEventListener("click", (e) => {
+    e.preventDefault()
+    modalPartOne.setAttribute("style", "display:none;")
+    modalPartTwo.setAttribute("style", "")
+    findCategories()
+})
+
+// Delete function in modal
+function deleteProject(trashLink) {
     trashLink.forEach(link => {
         link.addEventListener("click", (event) => {
             event.preventDefault()
-            const projetId = link.id
-            const divProjetId = document.querySelectorAll(`[data-id="${projetId}"]`)
-            let alertSuppression = confirm("Êtes-vous sûr de vouloir supprimer ce projet?")
-            if(alertSuppression) {
-                // Requête fetch avec method DELETE
+            const projectId = link.id
+            const divprojectId = document.querySelectorAll(`[data-id="${projectId}"]`)
+            let alertDelete = confirm("Êtes-vous sûr de vouloir supprimer ce project?")
+            if(alertDelete) {
+                // Fetch request with DELETE method
                 try {
-                    fetch(`http://localhost:5678/api/works/${projetId}`, {
+                    fetch(`http://localhost:5678/api/works/${projectId}`, {
                         method: "DELETE",
                         headers: headerFetch,
-                        body: projetId
+                        body: projectId
                     }).then(response => {
                         if (response.ok === false) {
                             alert("Erreur de la requête HTTP")
                         } else {
-                            divProjetId.forEach(block => {
+                            divprojectId.forEach(block => {
                                 block.remove()
                             })
                         }
                     })
                 } catch(error) {
                     console.error(error)
-                    alert("Le projet n'a pas pu être supprimé")
+                    alert("Le project n'a pas pu être supprimé")
                 }
             } 
         })
     })
 }
 
-// Fonction d'ouverture de la modale partie 2 (Ajout Photo)
-boutonAjouter.addEventListener("click", (e) => {
-    e.preventDefault()
-    modalPartOne.setAttribute("style", "display:none;")
-    modalPartTwo.setAttribute("style", "")
-    chercherCategories()
-})
-
-// Fonction d'ajout du contenu sur la partie Ajout Photo de la modale
-function chercherCategories() {
-    const selectCategories = document.getElementById("input-categorie-ajouter-photo")
+// Function add categories in the select area (modal part 2)
+function findCategories() {
+    const selectCategories = document.getElementById("input-category-add-img")
     selectCategories.innerHTML += `<option value="" disabled selected style="display: none;"></option>`
     fetch("http://localhost:5678/api/categories")
     .then(response => {
@@ -180,13 +179,13 @@ function chercherCategories() {
     })
 }
 
-// Retour sur la modale part 1
+// Back to modal part 1 on back icon click
 linkBack.addEventListener("click", () => {
     modalPartOne.setAttribute("style", "")
     modalPartTwo.setAttribute("style", "display:none;")
 })
 
-// Aperçu de l'image lors de l'input file et erreur si le fichier est trop volumineux
+// Max size check and image preview in modal part 2
 if(inputFile.value) {inputFile.value = ""}
 inputFile.addEventListener("change", (event) => {
     errorFileSize.setAttribute("style", "display:none;")
@@ -201,34 +200,34 @@ inputFile.addEventListener("change", (event) => {
             return
         }
         else {
-            divAjoutPhoto.setAttribute("style", "display: none;")
-            divApercuPhoto.setAttribute("style", "")
-            divApercuPhoto.innerHTML = `
-                <img id="img-apercu" src="${pathFile}" alt="${file.name}"></img>
+            divAddImage.setAttribute("style", "display: none;")
+            divPreviewImage.setAttribute("style", "")
+            divPreviewImage.innerHTML = `
+                <img id="img-preview" src="${pathFile}" alt="${file.name}"></img>
             `
         }
     }
 })
 
-// Vérification des valeurs du formulaire
-formProjets.addEventListener("input", () => {
-    if(inputFile.value && inputTitre.value && selectCategory.value){
-        btnValiderAjouterPhoto.setAttribute("style", "")
+// Data check in form and change submit button if ok
+formProjects.addEventListener("input", () => {
+    if(inputFile.value && inputTitle.value && selectCategory.value){
+        btnSubmitAddImage.setAttribute("style", "")
         fakeBtn.setAttribute("style", "display: none;")
     } else {
-        btnValiderAjouterPhoto.setAttribute("style", "display: none;")
+        btnSubmitAddImage.setAttribute("style", "display: none;")
         fakeBtn.setAttribute("style", "")
     }
 })
-// Message d'erreur si mauvais remplissage des champs
+// Error message for wrong input in form
 fakeBtn.addEventListener("click", () => {
     alert("Les champs ne sont pas correctement remplis")
 })
 
-// Méthode POST sur les nouveaux projets
-btnValiderAjouterPhoto.addEventListener("click", (e) => {
+// Add new project with POST method
+btnSubmitAddImage.addEventListener("click", (e) => {
     e.preventDefault()
-    const formData = new FormData(formProjets)
+    const formData = new FormData(formProjects)
     try {
         fetch("http://localhost:5678/api/works", {
             method: "POST",
@@ -237,33 +236,33 @@ btnValiderAjouterPhoto.addEventListener("click", (e) => {
         }).then(response => {
             if (!response.ok) {alert("Erreur de la requête HTTP")} 
             else {
-                alert("Le projet a été correctement ajouté")
+                alert("Le project a été correctement ajouté")
                 const image = formData.get('image')
                 const urlImage = URL.createObjectURL(image)
                 console.log(urlImage)
                 const newProjectHTML = `
                 <figure data-id="">
-                    <img src="${urlImage}" alt="${inputTitre.value}">
-                    <figcaption>${inputTitre.value}</figcaption>
+                    <img src="${urlImage}" alt="${inputTitle.value}">
+                    <figcaption>${inputTitle.value}</figcaption>
                 </figure>
                 `
                 const newProjectModalHTML = `
-                <div data-id="" class="div-image-modal">
+                <div data-id="" class="div-img-modal">
                     <img class="img-modal" src="${urlImage}">
                     <a id="" class="link-icon-trash">
                         <i class="fa-solid fa-trash-can"></i>
                     </a>
                 </div>
                 `
-                divProjets.innerHTML += newProjectHTML
-                contentModale.innerHTML += newProjectModalHTML
-                formProjets.reset()
-                divAjoutPhoto.setAttribute("style", "")
-                divApercuPhoto.setAttribute("style", "display: none;")
+                divProjects.innerHTML += newProjectHTML
+                contentModal.innerHTML += newProjectModalHTML
+                formProjects.reset()
+                divAddImage.setAttribute("style", "")
+                divPreviewImage.setAttribute("style", "display: none;")
             }
         })
     } catch(error) {
         console.error(error)
-        alert("Le projet n'a pas pu être ajouté")
+        alert("Le project n'a pas pu être ajouté")
     }
 })

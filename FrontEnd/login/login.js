@@ -1,37 +1,37 @@
-const champEmail = document.getElementById("email")
+const inputEmail = document.getElementById("email")
 const errorEmail = document.getElementById("email-error")
-const champPassword = document.getElementById("password")
+const inputPassword = document.getElementById("password")
 const errorPassword = document.getElementById("password-error")
-const formulaires = document.getElementById("login-form")
+const forms = document.getElementById("login-form")
 const loginError = document.getElementById("response-error")
 const requestError = document.getElementById("request-error")
 
-// RegEx Champ d'email
-champEmail.addEventListener("change", event => {
-    const valeurEmail = event.target.value.trim()
+// RegEx on email input
+inputEmail.addEventListener("change", event => {
+    const emailValue = event.target.value.trim()
     const regex = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+")
-    const resultEmail = regex.test(valeurEmail)
+    const resultEmail = regex.test(emailValue)
     if (!resultEmail) {errorEmail.setAttribute("style", "display: block;")}
     else {errorEmail.setAttribute("style", "display: none;")}
 })
 
-// Regex Champ de Password
-champPassword.addEventListener("change", event => {
-    const valeurPassword = event.target.value.trim()
+// Regex on password input
+inputPassword.addEventListener("change", event => {
+    const passwordValue = event.target.value.trim()
     const regex = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{1,}$")
-    const resultPassword = regex.test(valeurPassword)
+    const resultPassword = regex.test(passwordValue)
     if (!resultPassword) {errorPassword.setAttribute("style", "display: block;")}
     else {errorPassword.setAttribute("style", "display: none;")}
 })
 
-// Submit du formulaire de Login
-formulaires.addEventListener("submit", event => {
+// Submit login form
+forms.addEventListener("submit", event => {
     event.preventDefault()
-    const objetJsonLogin = {
-        email: champEmail.value,
-        password: champPassword.value,
+    const objectJsonLogin = {
+        email: inputEmail.value,
+        password: inputPassword.value,
     }
-    const bodyRequete = JSON.stringify(objetJsonLogin)
+    const bodyRequete = JSON.stringify(objectJsonLogin)
     fetch("http://localhost:5678/api/users/login", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
