@@ -134,7 +134,6 @@ buttonAdd.addEventListener("click", (e) => {
     e.preventDefault()
     modalPartOne.setAttribute("style", "display:none;")
     modalPartTwo.setAttribute("style", "")
-    findCategories()
 })
 
 // Delete function in modal
@@ -170,24 +169,6 @@ function deleteProject(trashLink) {
     })
 }
 
-// Function add categories in the select area (modal part 2)
-function findCategories() {
-    fetch("http://localhost:5678/api/categories")
-    .then(response => {
-        if (response.ok === false) {
-            throw new Error("Erreur de la requête HTTP")
-        }
-        return response.json()
-    })
-    .then(data => {
-        data.forEach(objet => {
-            const id = objet.id
-            const name = objet.name
-            selectCategory.innerHTML += `<option value="${id}">${name}</option>`
-        })
-    })
-}
-
 // Back to modal part 1 on back icon click
 linkBack.addEventListener("click", () => {
     modalPartOne.setAttribute("style", "")
@@ -216,6 +197,22 @@ inputFile.addEventListener("change", (event) => {
             `
         }
     }
+})
+
+// Add categories in the select area (modal part 2)
+fetch("http://localhost:5678/api/categories")
+.then(response => {
+    if (response.ok === false) {
+        throw new Error("Erreur de la requête HTTP")
+    }
+    return response.json()
+})
+.then(data => {
+    data.forEach(objet => {
+        const id = objet.id
+        const name = objet.name
+        selectCategory.innerHTML += `<option value="${id}">${name}</option>`
+    })
 })
 
 // Data check in form and change submit button if ok
@@ -276,7 +273,7 @@ btnSubmitAddImage.addEventListener("click", (e) => {
     }
 })
 
-// additionnal, style on projects
+// additionnal: style animation on projects
 function styleProject(figProjects) {
     figProjects.forEach((div,index) => {
         div.style.animationDelay = (index * 0.15) + "s"

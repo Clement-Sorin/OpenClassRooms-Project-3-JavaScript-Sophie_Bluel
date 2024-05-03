@@ -438,7 +438,7 @@ footer a {
 	justify-content: center;
 }
 
-#btn-add, #btn-submit-add-img , #btn-contact{
+#btn-add, #btn-submit-add-img , #btn-contact, #btn-login{
 	padding: 8px 0;
 	width: 327px;
 	margin-top: 30px;
@@ -466,7 +466,7 @@ footer a {
 	}
 }
 
-#btn-add:hover, #btn-submit-add-img:hover, #btn-contact:hover  {
+#btn-add:hover, #btn-submit-add-img:hover, #btn-contact:hover, #btn-login:hover {
 	animation: easeBackgroundColorBtn 0.3s forwards;
 }
 
