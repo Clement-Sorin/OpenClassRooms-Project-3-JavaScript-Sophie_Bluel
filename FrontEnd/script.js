@@ -27,7 +27,8 @@ const btnSubmitAddImage = document.getElementById("btn-submit-add-img")
 const fakeBtn = document.getElementById("fake-btn-submit")
 
 // Data request from API
-fetch("http://localhost:5678/api/works")
+try {
+    fetch("http://localhost:5678/api/works")
     .then(response => {
         if (response.ok === false) {
             throw new Error("Erreur de la requête HTTP")
@@ -42,7 +43,9 @@ fetch("http://localhost:5678/api/works")
         })
         const tableCategories = Array.from(categoryName)
         let filterHTML = ""
+        // Filter "tous" (all)
         filterHTML = `<button id="${tableCategories}" class="btn-filter">Tous</button>`
+        // filters by catagories available in API
         tableCategories.forEach(filter => {
             filterHTML += `
             <button id="${filter}" class="btn-filter">${filter}</button>
@@ -50,16 +53,16 @@ fetch("http://localhost:5678/api/works")
         })
         divFilters.innerHTML = filterHTML
 
-        // Projects display by filters in DOM
+        // Projects display by filters in DOM (main page and modal - modal being the first filter by default)
         const btnFilters = document.querySelectorAll(".btn-filter")
         btnFilters.forEach(filter => {
             filter.addEventListener("click", () => {
                 btnFilters.forEach(btn => {
                     btn.classList.remove("filter-selected")
                 })
-                filter.classList.add("filter-selected")
+                filter.classList.add("filter-selected") 
                 const id = filter.id
-                const categories = id.split(",")
+                const categories = id.split(",") 
                 const projectfilters = works.filter(work => categories.includes(work.category.name))
                 let projectfiltersHTML = ""
                 let projectModalHTML = ""
@@ -81,16 +84,24 @@ fetch("http://localhost:5678/api/works")
                 })
                 divProjects.innerHTML = projectfiltersHTML
                 contentModal.innerHTML = projectModalHTML
+                // Delete project
                 const trashLink = document.querySelectorAll(".link-icon-trash")
                 deleteProject(trashLink)
+                // Style on projects (additionnal)
+                const figProjects = document.querySelectorAll(".fig-project")
+                styleProject(figProjects)
             })
         })
         // First filter selection on page load (all categories)
         for(let i=0; i<btnFilters.length; i++) {
-            btnFilters[i].click()
+            btnFilters[0].click()
             break
         }
     })
+} catch(error) {
+    console.error(error)
+    alert("La requête n'a pas pu être effectuée")
+}
 
 // Auth verification
 if (token) {
@@ -264,3 +275,10 @@ btnSubmitAddImage.addEventListener("click", (e) => {
         alert("Le project n'a pas pu être ajouté")
     }
 })
+
+// additionnal, style on projects
+function styleProject(figProjects) {
+    figProjects.forEach((div,index) => {
+        div.style.animationDelay = (index * 0.15) + "s"
+    })
+}
