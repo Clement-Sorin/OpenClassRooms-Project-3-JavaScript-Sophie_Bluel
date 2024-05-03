@@ -161,8 +161,6 @@ function deleteProject(trashLink) {
 
 // Function add categories in the select area (modal part 2)
 function findCategories() {
-    const selectCategories = document.getElementById("input-category-add-img")
-    selectCategories.innerHTML += `<option value="" disabled selected style="display: none;"></option>`
     fetch("http://localhost:5678/api/categories")
     .then(response => {
         if (response.ok === false) {
@@ -174,7 +172,7 @@ function findCategories() {
         data.forEach(objet => {
             const id = objet.id
             const name = objet.name
-            selectCategories.innerHTML += `<option value="${id}">${name}</option>`
+            selectCategory.innerHTML += `<option value="${id}">${name}</option>`
         })
     })
 }
