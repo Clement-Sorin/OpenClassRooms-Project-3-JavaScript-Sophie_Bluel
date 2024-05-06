@@ -2,10 +2,6 @@ const divProjects = document.querySelector(".gallery")
 const divFilters = document.querySelector(".filters")
 const logButton = document.getElementById("log")
 const token = window.localStorage.getItem("token")
-const headerFetch = {
-    "Authorization": "Bearer " + token,
-    "Accept": "application/json"
-}
 const divEdit = document.getElementById("div-edit-hidden")
 const divPortTitle = document.getElementById("modif-hidden")
 const modal = document.getElementById("modal")
@@ -93,10 +89,7 @@ try {
             })
         })
         // First filter selection on page load (all categories)
-        for(let i=0; i<btnFilters.length; i++) {
-            btnFilters[0].click()
-            break
-        }
+        btnFilters[0].click()
     })
 } catch(error) {
     console.error(error)
@@ -141,6 +134,10 @@ function deleteProject(trashLink) {
     trashLink.forEach(link => {
         link.addEventListener("click", (event) => {
             event.preventDefault()
+            const headerFetch = {
+                "Authorization": "Bearer " + token,
+                "Accept": "application/json"
+            }
             const projectId = link.id
             const divprojectId = document.querySelectorAll(`[data-id="${projectId}"]`)
             let alertDelete = confirm("Êtes-vous sûr de vouloir supprimer ce project?")
@@ -193,7 +190,7 @@ inputFile.addEventListener("change", (event) => {
             divAddImage.setAttribute("style", "display: none;")
             divPreviewImage.setAttribute("style", "")
             divPreviewImage.innerHTML = `
-                <img id="img-preview" src="${pathFile}" alt="${file.name}"></img>
+                <img id="img-preview" src="${pathFile}" alt="${file.name}">
             `
         }
     }
@@ -234,6 +231,10 @@ fakeBtn.addEventListener("click", () => {
 btnSubmitAddImage.addEventListener("click", (e) => {
     e.preventDefault()
     const formData = new FormData(formProjects)
+    const headerFetch = {
+        "Authorization": "Bearer " + token,
+        "Accept": "application/json"
+    }
     try {
         fetch("http://localhost:5678/api/works", {
             method: "POST",
@@ -242,30 +243,34 @@ btnSubmitAddImage.addEventListener("click", (e) => {
         }).then(response => {
             if (!response.ok) {alert("Erreur de la requête HTTP")} 
             else {
-                alert("Le project a été correctement ajouté")
-                const image = formData.get('image')
-                const urlImage = URL.createObjectURL(image)
-                console.log(urlImage)
-                const newProjectHTML = `
-                <figure data-id="">
-                    <img src="${urlImage}" alt="${inputTitle.value}">
-                    <figcaption>${inputTitle.value}</figcaption>
-                </figure>
-                `
-                const newProjectModalHTML = `
-                <div data-id="" class="div-img-modal">
-                    <img class="img-modal" src="${urlImage}">
-                    <a id="" class="link-icon-trash">
-                        <i class="fa-solid fa-trash-can"></i>
-                    </a>
-                </div>
-                `
-                divProjects.innerHTML += newProjectHTML
-                contentModal.innerHTML += newProjectModalHTML
-                formProjects.reset()
-                divAddImage.setAttribute("style", "")
-                divPreviewImage.setAttribute("style", "display: none;")
+                return response.json()
             }
+        }).then(data => {
+            alert("Le project a été correctement ajouté")
+            const image = formData.get('image')
+            const urlImage = URL.createObjectURL(image)
+            const id = data.id
+            const newProjectHTML = `
+            <figure data-id="${id}">
+                <img src="${urlImage}" alt="${inputTitle.value}">
+                <figcaption>${inputTitle.value}</figcaption>
+            </figure>
+            `
+            const newProjectModalHTML = `
+            <div data-id="${id}" class="div-img-modal">
+                <img class="img-modal" src="${urlImage}">
+                <a id="${id}" class="link-icon-trash">
+                    <i class="fa-solid fa-trash-can"></i>
+                </a>
+            </div>
+            `
+            divProjects.innerHTML += newProjectHTML
+            contentModal.innerHTML += newProjectModalHTML
+            formProjects.reset()
+            divAddImage.setAttribute("style", "")
+            const trashLink = document.querySelectorAll(".link-icon-trash")
+            deleteProject(trashLink)
+            divPreviewImage.setAttribute("style", "display: none;")
         })
     } catch(error) {
         console.error(error)
