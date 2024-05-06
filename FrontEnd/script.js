@@ -268,6 +268,8 @@ btnSubmitAddImage.addEventListener("click", (e) => {
             contentModal.innerHTML += newProjectModalHTML
             formProjects.reset()
             divAddImage.setAttribute("style", "")
+            btnSubmitAddImage.setAttribute("style", "display: none;")
+            fakeBtn.setAttribute("style", "")
             const trashLink = document.querySelectorAll(".link-icon-trash")
             deleteProject(trashLink)
             divPreviewImage.setAttribute("style", "display: none;")
