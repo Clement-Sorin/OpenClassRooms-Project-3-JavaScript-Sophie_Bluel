@@ -47,6 +47,6 @@ forms.addEventListener("submit", event => {
         window.localStorage.setItem("token", token)
         window.location.href = "../../index.html"
     }).catch(() => {
-        requestError.setAttribute("style", "display: block;")
+        console.error("Connexion impossible")
     })
 })

@@ -251,7 +251,7 @@ btnSubmitAddImage.addEventListener("click", (e) => {
             const urlImage = URL.createObjectURL(image)
             const id = data.id
             const newProjectHTML = `
-            <figure data-id="${id}">
+            <figure class="fig-project" data-id="${id}">
                 <img src="${urlImage}" alt="${inputTitle.value}">
                 <figcaption>${inputTitle.value}</figcaption>
             </figure>
@@ -268,11 +268,11 @@ btnSubmitAddImage.addEventListener("click", (e) => {
             contentModal.innerHTML += newProjectModalHTML
             formProjects.reset()
             divAddImage.setAttribute("style", "")
+            divPreviewImage.setAttribute("style", "display: none;")
             btnSubmitAddImage.setAttribute("style", "display: none;")
             fakeBtn.setAttribute("style", "")
             const trashLink = document.querySelectorAll(".link-icon-trash")
             deleteProject(trashLink)
-            divPreviewImage.setAttribute("style", "display: none;")
         })
     } catch(error) {
         console.error(error)
