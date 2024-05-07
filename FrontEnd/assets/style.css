@@ -228,6 +228,7 @@ a, button, input[type="submit"]{
 
 .gallery img {
 	width: 100%;
+	max-height: 489px;
 }
 
 @keyframes fadeInProjects {
@@ -239,10 +240,6 @@ a, button, input[type="submit"]{
 		opacity: 1;
 		transform: translateY(0);
 	}
-}
-.fig-project {
-	opacity: 0;
-	animation: fadeInProjects 1s forwards;
 }
 
 figcaption {
@@ -417,6 +414,7 @@ footer {
 
 .img-modal {
 	width: 80px;
+	max-height: 106px;
 }
 
 .link-icon-trash {

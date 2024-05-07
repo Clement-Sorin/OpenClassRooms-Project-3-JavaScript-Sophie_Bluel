@@ -282,7 +282,11 @@ btnSubmitAddImage.addEventListener("click", (e) => {
 
 // additionnal: style animation on projects
 function styleProject(figProjects) {
-    figProjects.forEach((div,index) => {
-        div.style.animationDelay = (index * 0.15) + "s"
-    })
+    if (!token) {
+        figProjects.forEach((div,index) => {
+            div.style.opacity = "0"
+            div.style.animation = "fadeInProjects 1s forwards"
+            div.style.animationDelay = (index * 0.15) + "s"
+        })
+    } 
 }
